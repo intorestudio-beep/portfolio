@@ -400,15 +400,15 @@
     <button class="drawer-close" onclick="closeDrawer()">✕</button>
   </div>
   <nav class="drawer-links">
-    <a href="#about" onclick="closeDrawer()">👤 About</a>
-    <a href="#services" onclick="closeDrawer()">💼 Services</a>
-    <a href="#skills" onclick="closeDrawer()">⚡ Skills</a>
-    <a href="#projects" onclick="closeDrawer()">🚀 Projects</a>
-    <a href="#experience" onclick="closeDrawer()">📅 Experience</a>
-    <a href="#education" onclick="closeDrawer()">🎓 Education</a>
-    <a href="#photography" onclick="closeDrawer()">📸 Photography</a>
-    <a href="#testimonials" onclick="closeDrawer()">💬 Testimonials</a>
-    <a href="#contact" onclick="closeDrawer()">✉ Contact</a>
+    <a href="#about">👤 About</a>
+    <a href="#services">💼 Services</a>
+    <a href="#skills">⚡ Skills</a>
+    <a href="#projects">🚀 Projects</a>
+    <a href="#experience">📅 Experience</a>
+    <a href="#education">🎓 Education</a>
+    <a href="#photography">📸 Photography</a>
+    <a href="#testimonials">💬 Testimonials</a>
+    <a href="#contact">✉ Contact</a>
   </nav>
   <div class="drawer-actions">
     <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Richard," class="drawer-cta">Hire Me</a>
@@ -868,8 +868,22 @@
   if (saved) { document.documentElement.setAttribute('data-theme', saved); document.getElementById('theme-btn').textContent = saved === 'dark' ? '🌙' : '☀️'; }
 
   // ── MOBILE DRAWER ──
-  function openDrawer() { document.getElementById('mobile-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeDrawer() { document.getElementById('mobile-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+  function openDrawer() {
+    document.getElementById('mobile-drawer').classList.add('open');
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    document.getElementById('mobile-drawer').classList.remove('open');
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close drawer on any link click inside it
+  document.getElementById('mobile-drawer').querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() { closeDrawer(); });
+  });
+  // Ensure drawer is closed on page load
+  closeDrawer();
 
   // ── MODALS ──
   function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
