@@ -1,159 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Richard Manzi | Portfolio</title>
+  <title>Richard Manzi | Software Developer & Creative Technologist — Kigali, Rwanda</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Richard Manzi is a Software Developer, Web Developer, AI Builder, and Creative Technologist based in Kigali, Rwanda. Available for remote work and international opportunities." />
+  <meta name="keywords" content="Richard Manzi, Software Developer Rwanda, Web Developer Kigali, AI Developer Africa, Photographer Rwanda, Portfolio" />
+  <meta name="author" content="Richard Manzi" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (WhatsApp / Facebook preview) -->
+  <meta property="og:title" content="Richard Manzi | Software Developer & Creative Technologist" />
+  <meta property="og:description" content="Self-driven developer and creative technologist from Kigali, Rwanda. Building AI tools, web apps, and visual content." />
+  <meta property="og:image" content="https://intorestudio-beep.github.io/portfolio/profile.jpg" />
+  <meta property="og:url" content="https://intorestudio-beep.github.io/portfolio/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Richard Manzi | Portfolio" />
+  <meta name="twitter:description" content="Software Developer, AI Builder & Photographer from Kigali, Rwanda." />
+  <meta name="twitter:image" content="https://intorestudio-beep.github.io/portfolio/profile.jpg" />
+
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c0392b'/><text y='.9em' font-size='60' x='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='bold' fill='white'>RM</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c0392b'/><text y='.9em' font-size='55' x='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='bold' fill='white'>RM</text></svg>" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PLACEHOLDER');</script>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
+
+    /* ── THEMES ── */
+    [data-theme="dark"] {
       --bg: #0a0a0f; --bg2: #111118; --bg3: #16161f; --card: #1a1a26;
       --accent: #c0392b; --accent2: #e74c3c; --accent3: #ff6b6b;
       --text: #f0f0f5; --muted: #8888aa; --border: #2a2a3a; --white: #ffffff;
+      --nav-bg: rgba(10,10,15,0.95); --shadow: rgba(0,0,0,0.5);
     }
+    [data-theme="light"] {
+      --bg: #f5f5fa; --bg2: #ffffff; --bg3: #eeeef5; --card: #ffffff;
+      --accent: #c0392b; --accent2: #e74c3c; --accent3: #c0392b;
+      --text: #1a1a2e; --muted: #666688; --border: #dddde8; --white: #1a1a2e;
+      --nav-bg: rgba(245,245,250,0.95); --shadow: rgba(0,0,0,0.1);
+    }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; transition: background 0.3s, color 0.3s; }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
+    /* ── SCROLL PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      z-index: 9999; transition: width 0.1s linear;
+    }
+
     /* ── PAGE LOADER ── */
     #loader {
-      position: fixed; inset: 0; z-index: 9999;
+      position: fixed; inset: 0; z-index: 9998;
       background: var(--bg);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     #loader.hidden { opacity: 0; visibility: hidden; }
-    .loader-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.5rem; font-weight: 800; color: var(--white);
-      letter-spacing: -1px; margin-bottom: 1.5rem;
-    }
+    .loader-logo { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--text); letter-spacing: -1px; margin-bottom: 1.5rem; }
     .loader-logo span { color: var(--accent); }
-    .loader-bar-bg {
-      width: 200px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden;
-    }
-    .loader-bar-fill {
-      height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent3));
-      border-radius: 3px; animation: loadBar 1.5s ease forwards;
-    }
+    .loader-bar-bg { width: 200px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .loader-bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 3px; animation: loadBar 1.5s ease forwards; }
     @keyframes loadBar { to { width: 100%; } }
 
     /* ── MOBILE DRAWER ── */
     #mobile-drawer {
       position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
       background: var(--bg2); border-left: 1px solid var(--border);
-      z-index: 200; transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
-      display: flex; flex-direction: column; padding: 2rem 1.5rem;
+      z-index: 300; transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+      display: flex; flex-direction: column; padding: 2rem 1.5rem; overflow-y: auto;
     }
     #mobile-drawer.open { right: 0; }
-    .drawer-close {
-      align-self: flex-end; background: none; border: none;
-      color: var(--muted); font-size: 1.8rem; cursor: pointer; margin-bottom: 2rem;
-    }
-    .drawer-links { display: flex; flex-direction: column; gap: 0; }
-    .drawer-links a {
-      color: var(--text); text-decoration: none; font-size: 1.1rem; font-weight: 500;
-      padding: 1rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s;
-    }
-    .drawer-links a:hover { color: var(--accent3); }
-    .drawer-cta {
-      margin-top: 2rem; background: var(--accent); color: var(--white);
-      padding: 0.9rem; border-radius: 8px; text-align: center;
-      text-decoration: none; font-weight: 700; font-size: 1rem;
-    }
-    .drawer-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-      z-index: 199; opacity: 0; visibility: hidden; transition: 0.3s;
-    }
-    .drawer-overlay.open { opacity: 1; visibility: visible; }
-    .drawer-socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
-    .drawer-social-link {
-      width: 40px; height: 40px; border-radius: 8px;
-      background: var(--card); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 1.1rem; transition: border-color 0.2s;
-    }
+    .drawer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .drawer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    .drawer-logo span { color: var(--accent); }
+    .drawer-close { background: var(--card); border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+    .drawer-links { display: flex; flex-direction: column; }
+    .drawer-links a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 500; padding: 0.9rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s, padding-left 0.2s; display: flex; align-items: center; gap: 0.6rem; }
+    .drawer-links a:hover { color: var(--accent3); padding-left: 0.5rem; }
+    .drawer-actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .drawer-cta { background: var(--accent); color: #fff; padding: 0.9rem; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+    .drawer-cv { background: transparent; color: var(--accent3); padding: 0.9rem; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(192,57,43,0.4); }
+    .drawer-socials { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+    .drawer-social-link { width: 40px; height: 40px; border-radius: 8px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; transition: border-color 0.2s; }
     .drawer-social-link:hover { border-color: var(--accent); }
+    .drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 299; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .drawer-overlay.open { opacity: 1; visibility: visible; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 3px; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 5%;
-      background: rgba(10,10,15,0.92); backdrop-filter: blur(12px);
+      padding: 0.85rem 4%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      gap: 1rem;
     }
-    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.5px; flex-shrink: 0; }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent3); }
-    .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .nav-socials { display: flex; gap: 0.6rem; }
-    .nav-social { width: 34px; height: 34px; border-radius: 6px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.95rem; transition: border-color 0.2s, transform 0.2s; }
+    .nav-links { display: flex; gap: 0; list-style: none; align-items: center; flex: 1; justify-content: center; }
+    .nav-links li a { color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 0.4rem 0.7rem; border-radius: 6px; transition: color 0.2s, background 0.2s; white-space: nowrap; }
+    .nav-links li a:hover, .nav-links li a.active { color: var(--accent3); background: rgba(192,57,43,0.08); }
+    .nav-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-social { width: 32px; height: 32px; border-radius: 6px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.9rem; transition: border-color 0.2s, transform 0.2s; }
     .nav-social:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .nav-cta { background: var(--accent); color: var(--white); padding: 0.5rem 1.2rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s, transform 0.2s; }
+    .theme-toggle { width: 32px; height: 32px; border-radius: 6px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; transition: border-color 0.2s; }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 0.45rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: background 0.2s, transform 0.2s; white-space: nowrap; }
     .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; display: block; transition: 0.3s; }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; display: block; transition: 0.3s; }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 6rem 5% 4rem;
+      padding: 7rem 4% 4rem;
       background: radial-gradient(ellipse at 70% 50%, rgba(192,57,43,0.12) 0%, transparent 60%),
                   radial-gradient(ellipse at 20% 80%, rgba(192,57,43,0.06) 0%, transparent 50%), var(--bg);
       position: relative; overflow: hidden;
     }
     #hero::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c0392b' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c0392b' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
     }
     .hero-inner { display: flex; align-items: center; gap: 5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
     .hero-text { flex: 1; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3);
-      color: var(--accent3); padding: 0.35rem 0.9rem; border-radius: 50px;
-      font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 0.5px;
-    }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: var(--accent3); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
     .hero-badge::before { content: '●'; font-size: 0.6rem; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
     .hero-name { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 0.5rem; }
-    .hero-name .first { color: var(--white); }
+    .hero-name .first { color: var(--text); }
     .hero-name .last { color: var(--accent); }
     .hero-title { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted); font-weight: 400; margin-bottom: 1.5rem; min-height: 2rem; }
     .hero-title .typed-text { color: var(--accent3); font-weight: 600; }
     .hero-title .cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--accent3); margin-left: 2px; vertical-align: middle; animation: blink 0.8s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .hero-desc { font-size: 1rem; color: #aaaacc; max-width: 520px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .hero-desc { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.8; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { background: var(--accent); color: var(--white); padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(192,57,43,0.4); }
     .btn-secondary { background: transparent; color: var(--text); padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1px solid var(--border); transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent3); transform: translateY(-2px); }
     .btn-download { background: transparent; color: var(--accent3); padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(192,57,43,0.4); transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
     .btn-download:hover { background: rgba(192,57,43,0.1); transform: translateY(-2px); }
-    .hero-photo { flex-shrink: 0; position: relative; }
-    .hero-photo-wrap { width: 340px; height: 400px; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid rgba(192,57,43,0.3); box-shadow: 0 0 60px rgba(192,57,43,0.2), 0 30px 80px rgba(0,0,0,0.5); }
+    .hero-photo { flex-shrink: 0; }
+    .hero-photo-wrap { width: 340px; height: 400px; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid rgba(192,57,43,0.3); box-shadow: 0 0 60px rgba(192,57,43,0.2), 0 30px 80px var(--shadow); }
     .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .hero-photo-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(10,10,15,0.5)); }
+    .hero-photo-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(10,10,15,0.4)); }
     .hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; }
     .stat { text-align: center; }
     .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--accent3); display: block; }
     .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
     /* ── SECTIONS ── */
-    section { padding: 5rem 5%; }
+    section { padding: 5rem 4%; }
     .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -1px; color: var(--white); margin-bottom: 1rem; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -1px; color: var(--text); margin-bottom: 1rem; }
     .section-title span { color: var(--accent); }
     .section-sub { color: var(--muted); font-size: 1rem; max-width: 600px; margin-bottom: 3rem; }
     .divider { width: 50px; height: 3px; background: var(--accent); border-radius: 2px; margin: 1rem 0 2.5rem; }
@@ -161,7 +180,7 @@
     /* ── ABOUT ── */
     #about { background: var(--bg2); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .about-text p { color: #aaaacc; line-height: 1.9; margin-bottom: 1.2rem; font-size: 1rem; }
+    .about-text p { color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; font-size: 1rem; }
     .about-info { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
     .about-info-item { display: flex; align-items: center; gap: 1rem; }
     .about-info-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
@@ -170,40 +189,60 @@
     .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
     .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
     .about-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-2px); }
-    .about-card-title { font-weight: 700; color: var(--white); margin-bottom: 0.5rem; font-size: 1rem; }
+    .about-card-title { font-weight: 700; color: var(--text); margin-bottom: 0.5rem; font-size: 1rem; }
     .about-card-text { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+    .service-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent3)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .service-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-5px); box-shadow: 0 20px 50px var(--shadow); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card.featured { border-color: rgba(192,57,43,0.4); }
+    .service-card.featured::before { transform: scaleX(1); }
+    .service-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+    .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .service-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .service-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .service-features { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .service-feature { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; }
+    .service-feature::before { content: '✓'; color: var(--accent3); font-weight: 700; flex-shrink: 0; }
+    .service-price { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--accent3); }
+    .service-cta { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff; padding: 0.65rem 1.2rem; border-radius: 7px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-top: 1rem; transition: all 0.2s; }
+    .service-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
     /* ── SKILLS ── */
-    #skills { background: var(--bg); }
+    #skills { background: var(--bg2); }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     .skill-category { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
     .skill-category:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-3px); }
-    .skill-cat-title { font-weight: 700; color: var(--white); margin-bottom: 1.2rem; font-size: 0.95rem; display: flex; align-items: center; gap: 0.6rem; }
+    .skill-cat-title { font-weight: 700; color: var(--text); margin-bottom: 1.2rem; font-size: 0.95rem; display: flex; align-items: center; gap: 0.6rem; }
     .skill-cat-icon { width: 32px; height: 32px; border-radius: 6px; background: rgba(192,57,43,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
     .skill-bar-wrap { margin-bottom: 1rem; }
     .skill-bar-top { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
     .skill-bar-name { font-size: 0.85rem; color: var(--text); }
     .skill-bar-pct { font-size: 0.8rem; color: var(--accent3); font-weight: 600; }
     .skill-bar-bg { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
-    .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
     .skill-tag { background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.2); color: var(--accent3); padding: 0.3rem 0.75rem; border-radius: 50px; font-size: 0.78rem; font-weight: 500; }
 
     /* ── PROJECTS ── */
-    #projects { background: var(--bg2); }
+    #projects { background: var(--bg3); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
     .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
     .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent3)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-    .project-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .project-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-5px); box-shadow: 0 20px 50px var(--shadow); }
     .project-card:hover::before { transform: scaleX(1); }
     .project-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
-    .project-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .project-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
     .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; }
     .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .project-tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--muted); padding: 0.25rem 0.65rem; border-radius: 4px; font-size: 0.75rem; }
     .project-more { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent3); font-size: 0.82rem; font-weight: 600; margin-top: 1rem; }
 
-    /* ── PROJECT MODAL ── */
+    /* ── MODAL ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 500; opacity: 0; visibility: hidden; transition: 0.3s; display: flex; align-items: center; justify-content: center; padding: 1rem; }
     .modal-overlay.open { opacity: 1; visibility: visible; }
     .modal-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; transform: translateY(30px); transition: transform 0.3s; }
@@ -211,48 +250,47 @@
     .modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--card); border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; border-radius: 8px; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
     .modal-close:hover { border-color: var(--accent); color: var(--accent3); }
     .modal-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
-    .modal-desc { color: #aaaacc; line-height: 1.9; margin-bottom: 1.5rem; }
-    .modal-features { margin-bottom: 1.5rem; }
-    .modal-features-title { font-weight: 700; color: var(--white); margin-bottom: 0.8rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-    .modal-feature { display: flex; align-items: flex-start; gap: 0.6rem; color: #aaaacc; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+    .modal-desc { color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; }
+    .modal-features-title { font-weight: 700; color: var(--text); margin-bottom: 0.8rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+    .modal-feature { display: flex; align-items: flex-start; gap: 0.6rem; color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
     .modal-feature::before { content: '→'; color: var(--accent3); flex-shrink: 0; }
-    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
 
     /* ── EXPERIENCE ── */
-    #experience { background: var(--bg); }
+    #experience { background: var(--bg2); }
     .timeline { position: relative; padding-left: 2rem; }
     .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); }
     .timeline-item { position: relative; margin-bottom: 2.5rem; }
     .timeline-dot { position: absolute; left: -2.45rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 10px rgba(192,57,43,0.5); }
     .timeline-date { font-size: 0.78rem; color: var(--accent3); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
-    .timeline-title { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+    .timeline-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
     .timeline-company { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.8rem; }
-    .timeline-desc { color: #aaaacc; font-size: 0.9rem; line-height: 1.8; }
+    .timeline-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
 
     /* ── EDUCATION ── */
-    #education { background: var(--bg2); }
+    #education { background: var(--bg3); }
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
     .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: all 0.2s; }
     .edu-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-3px); }
     .edu-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .edu-degree { font-weight: 700; color: var(--white); font-size: 1rem; margin-bottom: 0.3rem; }
+    .edu-degree { font-weight: 700; color: var(--text); font-size: 1rem; margin-bottom: 0.3rem; }
     .edu-school { color: var(--accent3); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.3rem; }
     .edu-year { color: var(--muted); font-size: 0.8rem; }
 
     /* ── PHOTOGRAPHY ── */
-    #photography { background: var(--bg3); }
+    #photography { background: var(--bg2); }
 
     /* ── TESTIMONIALS ── */
     #testimonials { background: var(--bg); }
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-    .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; transition: all 0.2s; }
+    .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.2s; }
     .testimonial-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-3px); }
     .testimonial-quote { font-size: 3rem; color: var(--accent); line-height: 1; margin-bottom: 1rem; font-family: Georgia, serif; }
-    .testimonial-text { color: #aaaacc; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+    .testimonial-text { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
     .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
-    .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--white); font-size: 1rem; flex-shrink: 0; }
-    .testimonial-name { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+    .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 1rem; flex-shrink: 0; }
+    .testimonial-name { font-weight: 700; color: var(--text); font-size: 0.95rem; }
     .testimonial-role { color: var(--muted); font-size: 0.8rem; }
     .testimonial-stars { color: #f1c40f; font-size: 0.85rem; margin-top: 0.2rem; }
 
@@ -262,7 +300,7 @@
     .lang-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; text-align: center; transition: all 0.2s; }
     .lang-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-3px); }
     .lang-flag { font-size: 2.5rem; margin-bottom: 0.8rem; }
-    .lang-name { font-weight: 700; color: var(--white); font-size: 1rem; margin-bottom: 0.3rem; }
+    .lang-name { font-weight: 700; color: var(--text); font-size: 1rem; margin-bottom: 0.3rem; }
     .lang-level { color: var(--muted); font-size: 0.82rem; }
     .lang-stars { color: var(--accent); font-size: 1rem; margin-top: 0.5rem; letter-spacing: 2px; }
 
@@ -270,7 +308,7 @@
     #contact { background: var(--bg3); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
-    .contact-item { display: flex; align-items: center; gap: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; transition: all 0.2s; text-decoration: none; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; transition: all 0.2s; text-decoration: none; color: inherit; }
     .contact-item:hover { border-color: rgba(192,57,43,0.4); transform: translateX(5px); }
     .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
     .contact-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
@@ -281,21 +319,37 @@
     .form-input, .form-textarea { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s; outline: none; }
     .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
     .form-textarea { resize: vertical; min-height: 130px; }
-    .form-btn { background: var(--accent); color: var(--white); border: none; padding: 0.9rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .form-btn { background: var(--accent); color: #fff; border: none; padding: 0.9rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
     .form-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(192,57,43,0.4); }
 
     /* ── FOOTER ── */
-    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2.5rem 5%; }
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2.5rem 4%; }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-    .footer-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--white); }
+    .footer-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); }
     .footer-name span { color: var(--accent); }
     .footer-text { color: var(--muted); font-size: 0.85rem; margin-top: 0.3rem; }
     .footer-socials { display: flex; gap: 0.8rem; }
     .footer-social { width: 40px; height: 40px; border-radius: 8px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; transition: border-color 0.2s, transform 0.2s; }
     .footer-social:hover { border-color: var(--accent); transform: translateY(-2px); }
 
+    /* ── WHATSAPP FLOAT ── */
+    #whatsapp-btn {
+      position: fixed; bottom: 5rem; right: 1.5rem; z-index: 50;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: waBounce 2s ease-in-out 3s 3;
+    }
+    #whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    @keyframes waBounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+    .wa-tooltip { position: absolute; right: 60px; background: #25D366; color: #fff; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+    #whatsapp-btn:hover .wa-tooltip { opacity: 1; }
+
     /* ── BACK TO TOP ── */
-    #back-top { position: fixed; bottom: 2rem; right: 2rem; width: 46px; height: 46px; background: var(--accent); border: none; border-radius: 10px; color: var(--white); font-size: 1.2rem; cursor: pointer; z-index: 50; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; box-shadow: 0 4px 20px rgba(192,57,43,0.4); }
+    #back-top { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 46px; height: 46px; background: var(--accent); border: none; border-radius: 10px; color: #fff; font-size: 1.2rem; cursor: pointer; z-index: 50; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; box-shadow: 0 4px 20px rgba(192,57,43,0.4); }
     #back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
     #back-top:hover { background: var(--accent2); transform: translateY(-2px); }
 
@@ -304,25 +358,33 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .nav-links li a { font-size: 0.78rem; padding: 0.4rem 0.5rem; }
+    }
     @media (max-width: 900px) {
       .hero-inner { flex-direction: column-reverse; gap: 2.5rem; text-align: center; }
       .hero-photo-wrap { width: 260px; height: 310px; }
       .hero-actions { justify-content: center; }
       .hero-stats { justify-content: center; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .nav-links, .nav-socials { display: none; }
+      .nav-links { display: none !important; }
+      .nav-social { display: none; }
       .hamburger { display: flex; }
     }
     @media (max-width: 600px) {
-      nav { padding: 1rem 4%; }
+      nav { padding: 0.85rem 4%; }
       section { padding: 3.5rem 4%; }
       .projects-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
-      #back-top { bottom: 1.2rem; right: 1.2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      #back-top, #whatsapp-btn { right: 1rem; }
     }
   </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
 
 <!-- PAGE LOADER -->
 <div id="loader">
@@ -333,23 +395,30 @@
 <!-- MOBILE DRAWER -->
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
 <div id="mobile-drawer">
-  <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  <div class="drawer-header">
+    <span class="drawer-logo">Richard<span>.</span></span>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
   <nav class="drawer-links">
-    <a href="#about" onclick="closeDrawer()">About</a>
-    <a href="#skills" onclick="closeDrawer()">Skills</a>
-    <a href="#projects" onclick="closeDrawer()">Projects</a>
-    <a href="#experience" onclick="closeDrawer()">Experience</a>
-    <a href="#education" onclick="closeDrawer()">Education</a>
-    <a href="#photography" onclick="closeDrawer()">Photography</a>
-    <a href="#testimonials" onclick="closeDrawer()">Testimonials</a>
-    <a href="#contact" onclick="closeDrawer()">Contact</a>
+    <a href="#about" onclick="closeDrawer()">👤 About</a>
+    <a href="#services" onclick="closeDrawer()">💼 Services</a>
+    <a href="#skills" onclick="closeDrawer()">⚡ Skills</a>
+    <a href="#projects" onclick="closeDrawer()">🚀 Projects</a>
+    <a href="#experience" onclick="closeDrawer()">📅 Experience</a>
+    <a href="#education" onclick="closeDrawer()">🎓 Education</a>
+    <a href="#photography" onclick="closeDrawer()">📸 Photography</a>
+    <a href="#testimonials" onclick="closeDrawer()">💬 Testimonials</a>
+    <a href="#contact" onclick="closeDrawer()">✉ Contact</a>
   </nav>
+  <div class="drawer-actions">
+    <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Richard," class="drawer-cta">Hire Me</a>
+    <a href="mycv_260314_131811.jpg" download="Richard_Manzi_CV.jpg" class="drawer-cv">⬇ Download CV</a>
+  </div>
   <div class="drawer-socials">
     <a href="https://github.com/intorestudio-beep" target="_blank" class="drawer-social-link" title="GitHub">🐙</a>
+    <a href="https://wa.me/250782511514" target="_blank" class="drawer-social-link" title="WhatsApp">💬</a>
     <a href="mailto:richardmanzi30@gmail.com" class="drawer-social-link" title="Email">✉</a>
-    <a href="tel:+250782511514" class="drawer-social-link" title="Phone">📞</a>
   </div>
-  <a href="mycv_260314_131811.jpg" download="Richard_Manzi_CV.jpg" class="drawer-cta">⬇ Download CV</a>
 </div>
 
 <!-- NAV -->
@@ -357,6 +426,7 @@
   <a href="#hero" class="nav-logo">Richard<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -366,11 +436,10 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-socials">
-      <a href="https://github.com/intorestudio-beep" target="_blank" class="nav-social" title="GitHub">🐙</a>
-      <a href="mailto:richardmanzi30@gmail.com" class="nav-social" title="Email">✉</a>
-    </div>
-    <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry%20-%20Richard%20Manzi&body=Hi%20Richard%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20you." class="nav-cta" target="_blank" rel="noopener">Hire Me</a>
+    <a href="https://github.com/intorestudio-beep" target="_blank" class="nav-social" title="GitHub">🐙</a>
+    <a href="https://wa.me/250782511514" target="_blank" class="nav-social" title="WhatsApp">💬</a>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
+    <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Richard," class="nav-cta" target="_blank">Hire Me</a>
     <button class="hamburger" onclick="openDrawer()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -390,7 +459,7 @@
         <span class="typed-text" id="typed"></span><span class="cursor"></span>
       </p>
       <p class="hero-desc">
-        Self-driven developer and creative technologist from Kigali, Rwanda. I build modern digital solutions — from AI-powered platforms and business software to automation systems and visual content — that help organizations grow and innovate.
+        Self-driven developer and creative technologist from Kigali, Rwanda. I build modern digital solutions — from AI-powered platforms and business software to automation systems and visual content.
       </p>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary">View My Work →</a>
@@ -398,9 +467,10 @@
         <a href="mycv_260314_131811.jpg" download="Richard_Manzi_CV.jpg" class="btn-download">⬇ Download CV</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-num">8+</span><span class="stat-label">Projects</span></div>
-        <div class="stat"><span class="stat-num">2+</span><span class="stat-label">Years Exp.</span></div>
-        <div class="stat"><span class="stat-num">5</span><span class="stat-label">Languages</span></div>
+        <div class="stat"><span class="stat-num counter" data-target="8">0</span><span class="stat-label">Projects</span></div>
+        <div class="stat"><span class="stat-num counter" data-target="2">0</span><span class="stat-label">Years Exp.</span></div>
+        <div class="stat"><span class="stat-num counter" data-target="5">0</span><span class="stat-label">Languages</span></div>
+        <div class="stat"><span class="stat-num counter" data-target="100">0</span><span class="stat-label">% Committed</span></div>
       </div>
     </div>
     <div class="hero-photo">
@@ -423,18 +493,9 @@
         <p>My work spans web development, business software systems, automation workflows, and digital media. I enjoy solving complex problems with technology and continuously learning new tools in software development, cloud deployment, and AI systems.</p>
         <p>I am also interested in global education opportunities and technology research that can help bring innovative digital solutions to Africa.</p>
         <div class="about-info">
-          <div class="about-info-item">
-            <div class="about-info-icon">📍</div>
-            <div><div class="about-info-label">Location</div><div class="about-info-value">Kn 11 Street, Kigali, Rwanda</div></div>
-          </div>
-          <div class="about-info-item">
-            <div class="about-info-icon">📞</div>
-            <div><div class="about-info-label">Phone</div><div class="about-info-value">(+250) 782 511 514</div></div>
-          </div>
-          <div class="about-info-item">
-            <div class="about-info-icon">✉</div>
-            <div><div class="about-info-label">Email</div><div class="about-info-value">richardmanzi30@gmail.com</div></div>
-          </div>
+          <div class="about-info-item"><div class="about-info-icon">📍</div><div><div class="about-info-label">Location</div><div class="about-info-value">Kn 11 Street, Kigali, Rwanda</div></div></div>
+          <div class="about-info-item"><div class="about-info-icon">📞</div><div><div class="about-info-label">Phone</div><div class="about-info-value">(+250) 782 511 514</div></div></div>
+          <div class="about-info-item"><div class="about-info-icon">✉</div><div><div class="about-info-label">Email</div><div class="about-info-value">richardmanzi30@gmail.com</div></div></div>
         </div>
       </div>
       <div class="about-right fade-in">
@@ -442,6 +503,67 @@
         <div class="about-card"><div class="about-card-title">🎨 Creative Side</div><div class="about-card-text">Professional photographer and videographer providing services for events, digital content, storytelling, and online platforms.</div></div>
         <div class="about-card"><div class="about-card-title">🌍 My Mission</div><div class="about-card-text">Bringing innovative digital solutions to Africa through technology, entrepreneurship, and a passion for social impact.</div></div>
         <div class="about-card"><div class="about-card-title">📚 Always Learning</div><div class="about-card-text">Continuously exploring AI systems, cloud deployment, automation tools, and modern development frameworks through self-driven learning and real-world projects.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-tag">What I Offer</span>
+    <h2 class="section-title">My <span>Services</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Professional services tailored to help businesses and individuals grow digitally. Contact me for a custom quote.</p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Web Development</div>
+        <div class="service-desc">Professional, responsive websites and web applications built to showcase your brand and attract clients.</div>
+        <div class="service-features">
+          <div class="service-feature">Responsive design for all devices</div>
+          <div class="service-feature">Modern UI/UX design</div>
+          <div class="service-feature">Fast loading &amp; SEO-friendly</div>
+          <div class="service-feature">Deployed on Vercel / GitHub Pages</div>
+        </div>
+        <a href="https://wa.me/250782511514?text=Hi%20Richard%2C%20I%20need%20a%20website." target="_blank" class="service-cta">Get Started →</a>
+      </div>
+      <div class="service-card featured fade-in">
+        <div class="service-badge">Most Popular</div>
+        <div class="service-icon">🤖</div>
+        <div class="service-name">AI &amp; Automation</div>
+        <div class="service-desc">Custom AI integrations and automation workflows that save time, reduce manual work, and boost productivity.</div>
+        <div class="service-features">
+          <div class="service-feature">AI tool integration &amp; setup</div>
+          <div class="service-feature">n8n automation workflows</div>
+          <div class="service-feature">API integrations</div>
+          <div class="service-feature">Business process automation</div>
+        </div>
+        <a href="https://wa.me/250782511514?text=Hi%20Richard%2C%20I%20need%20AI%20automation." target="_blank" class="service-cta">Get Started →</a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">💼</div>
+        <div class="service-name">Business Software</div>
+        <div class="service-desc">Custom POS systems, inventory management, and software licensing platforms built for your business needs.</div>
+        <div class="service-features">
+          <div class="service-feature">POS &amp; inventory systems</div>
+          <div class="service-feature">MySQL database management</div>
+          <div class="service-feature">Multi-computer local network setup</div>
+          <div class="service-feature">Software licensing platforms</div>
+        </div>
+        <a href="https://wa.me/250782511514?text=Hi%20Richard%2C%20I%20need%20business%20software." target="_blank" class="service-cta">Get Started →</a>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📸</div>
+        <div class="service-name">Photography &amp; Video</div>
+        <div class="service-desc">Professional photography and videography for events, brand content, and digital storytelling.</div>
+        <div class="service-features">
+          <div class="service-feature">Event photography</div>
+          <div class="service-feature">Brand &amp; product shoots</div>
+          <div class="service-feature">Video content production</div>
+          <div class="service-feature">Digital media storytelling</div>
+        </div>
+        <a href="https://wa.me/250782511514?text=Hi%20Richard%2C%20I%20need%20photography%20services." target="_blank" class="service-cta">Get Started →</a>
       </div>
     </div>
   </div>
@@ -500,195 +622,27 @@
     <div class="divider"></div>
     <p class="section-sub">Click any project to learn more. Spanning AI, business software, web development, and automation.</p>
     <div class="projects-grid">
-      <div class="project-card fade-in" onclick="openModal('modal-1')">
-        <div class="project-icon">🎓</div>
-        <div class="project-title">AI Scholarship Automation Platform</div>
-        <div class="project-desc">A concept platform that automatically searches the internet for scholarship opportunities and applies for them using stored user profile information.</div>
-        <div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Automation</span><span class="project-tag">Web Scraping</span><span class="project-tag">API</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-2')">
-        <div class="project-icon">💊</div>
-        <div class="project-title">Pharmacy POS System</div>
-        <div class="project-desc">A point-of-sale system designed for pharmacies with potential integration to tax systems and payment APIs.</div>
-        <div class="project-tags"><span class="project-tag">POS</span><span class="project-tag">MySQL</span><span class="project-tag">API Integration</span><span class="project-tag">Business</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-3')">
-        <div class="project-icon">📦</div>
-        <div class="project-title">Pharmacy Inventory Management</div>
-        <div class="project-desc">A local inventory management system built with XAMPP and MySQL, enabling pharmacies to manage stock and sales on a local network.</div>
-        <div class="project-tags"><span class="project-tag">XAMPP</span><span class="project-tag">MySQL</span><span class="project-tag">Local Network</span><span class="project-tag">Inventory</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-4')">
-        <div class="project-icon">🔑</div>
-        <div class="project-title">Software Licensing Platform</div>
-        <div class="project-desc">A system where developers can upload software and customers receive license keys automatically after purchasing.</div>
-        <div class="project-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">License Keys</span><span class="project-tag">Automation</span><span class="project-tag">Web Dev</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-5')">
-        <div class="project-icon">🌐</div>
-        <div class="project-title">Business Website Development</div>
-        <div class="project-desc">Responsive, modern websites for businesses to showcase services, attract clients, and grow their online presence.</div>
-        <div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span><span class="project-tag">Vercel</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-6')">
-        <div class="project-icon">✏️</div>
-        <div class="project-title">Interactive Learning App</div>
-        <div class="project-desc">A learning application that helps children practice writing letters using touch input and interactive feedback.</div>
-        <div class="project-tags"><span class="project-tag">EdTech</span><span class="project-tag">Touch UI</span><span class="project-tag">Interactive</span><span class="project-tag">Children</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-7')">
-        <div class="project-icon">⚙️</div>
-        <div class="project-title">Automation Workflows (n8n)</div>
-        <div class="project-desc">Automation workflows using n8n to automate digital processes, content distribution, and repetitive tasks.</div>
-        <div class="project-tags"><span class="project-tag">n8n</span><span class="project-tag">Automation</span><span class="project-tag">Workflow</span><span class="project-tag">Productivity</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
-      <div class="project-card fade-in" onclick="openModal('modal-8')">
-        <div class="project-icon">📋</div>
-        <div class="project-title">Digital Productivity Products</div>
-        <div class="project-desc">Structured Notion systems and planning tools as digital products to help individuals and teams stay organized.</div>
-        <div class="project-tags"><span class="project-tag">Notion</span><span class="project-tag">Productivity</span><span class="project-tag">Digital Products</span><span class="project-tag">Planning</span></div>
-        <div class="project-more">View Details →</div>
-      </div>
+      <div class="project-card fade-in" onclick="openModal('modal-1')"><div class="project-icon">🎓</div><div class="project-title">AI Scholarship Automation Platform</div><div class="project-desc">Automatically searches and applies for scholarship opportunities using stored user profile information.</div><div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Automation</span><span class="project-tag">Web Scraping</span><span class="project-tag">API</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-2')"><div class="project-icon">💊</div><div class="project-title">Pharmacy POS System</div><div class="project-desc">Point-of-sale system for pharmacies with tax and payment API integration potential.</div><div class="project-tags"><span class="project-tag">POS</span><span class="project-tag">MySQL</span><span class="project-tag">API Integration</span><span class="project-tag">Business</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-3')"><div class="project-icon">📦</div><div class="project-title">Pharmacy Inventory Management</div><div class="project-desc">Local inventory system with XAMPP and MySQL for multi-computer pharmacy management.</div><div class="project-tags"><span class="project-tag">XAMPP</span><span class="project-tag">MySQL</span><span class="project-tag">Local Network</span><span class="project-tag">Inventory</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-4')"><div class="project-icon">🔑</div><div class="project-title">Software Licensing Platform</div><div class="project-desc">Developers upload software; customers receive license keys automatically after purchase.</div><div class="project-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">License Keys</span><span class="project-tag">Automation</span><span class="project-tag">Web Dev</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-5')"><div class="project-icon">🌐</div><div class="project-title">Business Website Development</div><div class="project-desc">Responsive, modern websites for businesses to showcase services and grow online.</div><div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span><span class="project-tag">Vercel</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-6')"><div class="project-icon">✏️</div><div class="project-title">Interactive Learning App</div><div class="project-desc">Children practice writing letters using touch input and interactive feedback.</div><div class="project-tags"><span class="project-tag">EdTech</span><span class="project-tag">Touch UI</span><span class="project-tag">Interactive</span><span class="project-tag">Children</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-7')"><div class="project-icon">⚙️</div><div class="project-title">Automation Workflows (n8n)</div><div class="project-desc">n8n workflows to automate digital processes, content distribution, and repetitive tasks.</div><div class="project-tags"><span class="project-tag">n8n</span><span class="project-tag">Automation</span><span class="project-tag">Workflow</span><span class="project-tag">Productivity</span></div><div class="project-more">View Details →</div></div>
+      <div class="project-card fade-in" onclick="openModal('modal-8')"><div class="project-icon">📋</div><div class="project-title">Digital Productivity Products</div><div class="project-desc">Structured Notion systems and planning tools sold as digital products.</div><div class="project-tags"><span class="project-tag">Notion</span><span class="project-tag">Productivity</span><span class="project-tag">Digital Products</span><span class="project-tag">Planning</span></div><div class="project-more">View Details →</div></div>
     </div>
   </div>
 </section>
 
-<!-- PROJECT MODALS -->
-<div class="modal-overlay" id="modal-1" onclick="closeModalOutside(event,'modal-1')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-1')">✕</button>
-    <div class="modal-icon">🎓</div>
-    <div class="modal-title">AI Scholarship Automation Platform</div>
-    <div class="modal-desc">A concept platform designed to help students — especially in Africa — find and apply for international scholarships automatically. The system stores user profile data and uses AI to search, match, and apply for relevant opportunities without manual effort.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Automated internet search for scholarship listings</div>
-      <div class="modal-feature">User profile storage for auto-filling applications</div>
-      <div class="modal-feature">AI-powered matching based on eligibility criteria</div>
-      <div class="modal-feature">Notification system for new opportunities</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">AI</span><span class="project-tag">Automation</span><span class="project-tag">Web Scraping</span><span class="project-tag">API Integration</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-2" onclick="closeModalOutside(event,'modal-2')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-2')">✕</button>
-    <div class="modal-icon">💊</div>
-    <div class="modal-title">Pharmacy POS System</div>
-    <div class="modal-desc">A complete point-of-sale system tailored for pharmacies, enabling fast sales processing, inventory tracking, and compliance with tax regulations through potential API integrations with payment and tax systems.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Fast sales processing and receipt generation</div>
-      <div class="modal-feature">Real-time inventory tracking</div>
-      <div class="modal-feature">Tax system API integration potential</div>
-      <div class="modal-feature">Payment gateway compatibility</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">POS</span><span class="project-tag">MySQL</span><span class="project-tag">API Integration</span><span class="project-tag">Business</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-3" onclick="closeModalOutside(event,'modal-3')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-3')">✕</button>
-    <div class="modal-icon">📦</div>
-    <div class="modal-title">Pharmacy Inventory Management</div>
-    <div class="modal-desc">A locally-hosted inventory management system built with XAMPP and MySQL, designed to run on multiple computers within a pharmacy's local network — enabling coordinated stock management and sales tracking.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Multi-computer local network support via XAMPP</div>
-      <div class="modal-feature">Real-time stock level monitoring</div>
-      <div class="modal-feature">Sales history and reporting</div>
-      <div class="modal-feature">Low-stock alerts and reorder management</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">XAMPP</span><span class="project-tag">MySQL</span><span class="project-tag">Local Network</span><span class="project-tag">Inventory</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-4" onclick="closeModalOutside(event,'modal-4')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-4')">✕</button>
-    <div class="modal-icon">🔑</div>
-    <div class="modal-title">Software Licensing Platform</div>
-    <div class="modal-desc">A digital marketplace platform where developers can upload their software products. After a customer completes a purchase, the system automatically generates and delivers a unique license key — eliminating manual distribution.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Developer product upload portal</div>
-      <div class="modal-feature">Automated license key generation on purchase</div>
-      <div class="modal-feature">Secure key delivery via email</div>
-      <div class="modal-feature">License validation and management</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">License Keys</span><span class="project-tag">Automation</span><span class="project-tag">Web Dev</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-5" onclick="closeModalOutside(event,'modal-5')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-5')">✕</button>
-    <div class="modal-icon">🌐</div>
-    <div class="modal-title">Business Website Development</div>
-    <div class="modal-desc">Designed and developed responsive, professional websites for businesses across various industries to help them establish a strong online presence, showcase their services, and attract more clients.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Fully responsive design for all devices</div>
-      <div class="modal-feature">Modern UI/UX with smooth animations</div>
-      <div class="modal-feature">Deployed on Vercel and GitHub Pages</div>
-      <div class="modal-feature">SEO-friendly structure and fast loading</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span><span class="project-tag">Vercel</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-6" onclick="closeModalOutside(event,'modal-6')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-6')">✕</button>
-    <div class="modal-icon">✏️</div>
-    <div class="modal-title">Interactive Learning App</div>
-    <div class="modal-desc">An educational application concept designed to make early childhood learning more engaging. Children practice writing letters through touch-based input with real-time interactive feedback, making the learning process fun and effective.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Touch-based letter tracing interface</div>
-      <div class="modal-feature">Real-time feedback and encouragement</div>
-      <div class="modal-feature">Progressive difficulty levels</div>
-      <div class="modal-feature">Child-friendly visual design</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">EdTech</span><span class="project-tag">Touch UI</span><span class="project-tag">Interactive</span><span class="project-tag">Children</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-7" onclick="closeModalOutside(event,'modal-7')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-7')">✕</button>
-    <div class="modal-icon">⚙️</div>
-    <div class="modal-title">Automation Workflows (n8n)</div>
-    <div class="modal-desc">Built powerful automation workflows using n8n to streamline repetitive digital tasks, automate content distribution across platforms, and improve overall operational efficiency for businesses and creators.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Multi-step automation pipelines</div>
-      <div class="modal-feature">Content distribution across social platforms</div>
-      <div class="modal-feature">Data processing and transformation</div>
-      <div class="modal-feature">Webhook and API trigger integrations</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">n8n</span><span class="project-tag">Automation</span><span class="project-tag">Workflow</span><span class="project-tag">Productivity</span></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-8" onclick="closeModalOutside(event,'modal-8')">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('modal-8')">✕</button>
-    <div class="modal-icon">📋</div>
-    <div class="modal-title">Digital Productivity Products</div>
-    <div class="modal-desc">Developing and selling structured Notion templates and planning systems as digital products. These tools help individuals and teams organize their work, set goals, track progress, and stay productive.</div>
-    <div class="modal-features">
-      <div class="modal-features-title">Key Features</div>
-      <div class="modal-feature">Pre-built Notion workspace templates</div>
-      <div class="modal-feature">Goal tracking and habit systems</div>
-      <div class="modal-feature">Project management frameworks</div>
-      <div class="modal-feature">Sold as downloadable digital products</div>
-    </div>
-    <div class="modal-tags"><span class="project-tag">Notion</span><span class="project-tag">Productivity</span><span class="project-tag">Digital Products</span><span class="project-tag">Planning</span></div>
-  </div>
-</div>
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-1" onclick="closeModalOutside(event,'modal-1')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-1')">✕</button><div class="modal-icon">🎓</div><div class="modal-title">AI Scholarship Automation Platform</div><div class="modal-desc">A concept platform designed to help students find and apply for international scholarships automatically. The system stores user profile data and uses AI to search, match, and apply for relevant opportunities.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Automated internet search for scholarship listings</div><div class="modal-feature">User profile storage for auto-filling applications</div><div class="modal-feature">AI-powered matching based on eligibility criteria</div><div class="modal-feature">Notification system for new opportunities</div><div class="modal-tags"><span class="project-tag">AI</span><span class="project-tag">Automation</span><span class="project-tag">Web Scraping</span><span class="project-tag">API Integration</span></div></div></div>
+<div class="modal-overlay" id="modal-2" onclick="closeModalOutside(event,'modal-2')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-2')">✕</button><div class="modal-icon">💊</div><div class="modal-title">Pharmacy POS System</div><div class="modal-desc">A complete point-of-sale system tailored for pharmacies, enabling fast sales processing, inventory tracking, and compliance with tax regulations through potential API integrations.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Fast sales processing and receipt generation</div><div class="modal-feature">Real-time inventory tracking</div><div class="modal-feature">Tax system API integration potential</div><div class="modal-feature">Payment gateway compatibility</div><div class="modal-tags"><span class="project-tag">POS</span><span class="project-tag">MySQL</span><span class="project-tag">API Integration</span><span class="project-tag">Business</span></div></div></div>
+<div class="modal-overlay" id="modal-3" onclick="closeModalOutside(event,'modal-3')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-3')">✕</button><div class="modal-icon">📦</div><div class="modal-title">Pharmacy Inventory Management</div><div class="modal-desc">A locally-hosted inventory management system built with XAMPP and MySQL, designed to run on multiple computers within a pharmacy's local network.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Multi-computer local network support via XAMPP</div><div class="modal-feature">Real-time stock level monitoring</div><div class="modal-feature">Sales history and reporting</div><div class="modal-feature">Low-stock alerts and reorder management</div><div class="modal-tags"><span class="project-tag">XAMPP</span><span class="project-tag">MySQL</span><span class="project-tag">Local Network</span><span class="project-tag">Inventory</span></div></div></div>
+<div class="modal-overlay" id="modal-4" onclick="closeModalOutside(event,'modal-4')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-4')">✕</button><div class="modal-icon">🔑</div><div class="modal-title">Software Licensing Platform</div><div class="modal-desc">A digital marketplace where developers upload software products and customers automatically receive license keys after purchase — eliminating manual distribution.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Developer product upload portal</div><div class="modal-feature">Automated license key generation on purchase</div><div class="modal-feature">Secure key delivery via email</div><div class="modal-feature">License validation and management</div><div class="modal-tags"><span class="project-tag">E-Commerce</span><span class="project-tag">License Keys</span><span class="project-tag">Automation</span><span class="project-tag">Web Dev</span></div></div></div>
+<div class="modal-overlay" id="modal-5" onclick="closeModalOutside(event,'modal-5')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-5')">✕</button><div class="modal-icon">🌐</div><div class="modal-title">Business Website Development</div><div class="modal-desc">Responsive, professional websites for businesses to establish a strong online presence, showcase services, and attract more clients.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Fully responsive design for all devices</div><div class="modal-feature">Modern UI/UX with smooth animations</div><div class="modal-feature">Deployed on Vercel and GitHub Pages</div><div class="modal-feature">SEO-friendly structure and fast loading</div><div class="modal-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Responsive</span><span class="project-tag">Vercel</span></div></div></div>
+<div class="modal-overlay" id="modal-6" onclick="closeModalOutside(event,'modal-6')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-6')">✕</button><div class="modal-icon">✏️</div><div class="modal-title">Interactive Learning App</div><div class="modal-desc">An educational application that helps children practice writing letters through touch-based input with real-time interactive feedback.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Touch-based letter tracing interface</div><div class="modal-feature">Real-time feedback and encouragement</div><div class="modal-feature">Progressive difficulty levels</div><div class="modal-feature">Child-friendly visual design</div><div class="modal-tags"><span class="project-tag">EdTech</span><span class="project-tag">Touch UI</span><span class="project-tag">Interactive</span><span class="project-tag">Children</span></div></div></div>
+<div class="modal-overlay" id="modal-7" onclick="closeModalOutside(event,'modal-7')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-7')">✕</button><div class="modal-icon">⚙️</div><div class="modal-title">Automation Workflows (n8n)</div><div class="modal-desc">Powerful automation workflows using n8n to streamline repetitive digital tasks, automate content distribution, and improve operational efficiency.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Multi-step automation pipelines</div><div class="modal-feature">Content distribution across platforms</div><div class="modal-feature">Data processing and transformation</div><div class="modal-feature">Webhook and API trigger integrations</div><div class="modal-tags"><span class="project-tag">n8n</span><span class="project-tag">Automation</span><span class="project-tag">Workflow</span><span class="project-tag">Productivity</span></div></div></div>
+<div class="modal-overlay" id="modal-8" onclick="closeModalOutside(event,'modal-8')"><div class="modal-box"><button class="modal-close" onclick="closeModal('modal-8')">✕</button><div class="modal-icon">📋</div><div class="modal-title">Digital Productivity Products</div><div class="modal-desc">Structured Notion templates and planning systems as digital products to help individuals and teams organize work, set goals, and stay productive.</div><div class="modal-features-title">Key Features</div><div class="modal-feature">Pre-built Notion workspace templates</div><div class="modal-feature">Goal tracking and habit systems</div><div class="modal-feature">Project management frameworks</div><div class="modal-feature">Sold as downloadable digital products</div><div class="modal-tags"><span class="project-tag">Notion</span><span class="project-tag">Productivity</span><span class="project-tag">Digital Products</span><span class="project-tag">Planning</span></div></div></div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
@@ -697,27 +651,9 @@
     <h2 class="section-title">Work <span>Experience</span></h2>
     <div class="divider"></div>
     <div class="timeline">
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2026 — Present</div>
-        <div class="timeline-title">Automation &amp; AI Developer</div>
-        <div class="timeline-company">Independent Projects · Remote</div>
-        <div class="timeline-desc">Building automation workflows and exploring AI tools to develop systems that automate tasks, process information, and improve digital productivity for businesses and individuals.</div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2024 — 2026</div>
-        <div class="timeline-title">Web Designer &amp; Developer</div>
-        <div class="timeline-company">Independent Projects · Rwanda</div>
-        <div class="timeline-desc">Designed and developed websites, business systems, and digital platforms that help businesses create an online presence and manage operations efficiently.</div>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2024 — 2026</div>
-        <div class="timeline-title">Photographer &amp; Videographer</div>
-        <div class="timeline-company">Freelance Creative · Rwanda</div>
-        <div class="timeline-desc">Providing professional photography and videography services for events, digital content, and storytelling. Producing creative visual content for online platforms and brand storytelling channels.</div>
-      </div>
+      <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2026 — Present</div><div class="timeline-title">Automation &amp; AI Developer</div><div class="timeline-company">Independent Projects · Remote</div><div class="timeline-desc">Building automation workflows and exploring AI tools to develop systems that automate tasks, process information, and improve digital productivity.</div></div>
+      <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2024 — 2026</div><div class="timeline-title">Web Designer &amp; Developer</div><div class="timeline-company">Independent Projects · Rwanda</div><div class="timeline-desc">Designed and developed websites, business systems, and digital platforms that help businesses create an online presence and manage operations efficiently.</div></div>
+      <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2024 — 2026</div><div class="timeline-title">Photographer &amp; Videographer</div><div class="timeline-company">Freelance Creative · Rwanda</div><div class="timeline-desc">Providing professional photography and videography services for events, digital content, and storytelling across Kigali, Rwanda.</div></div>
     </div>
   </div>
 </section>
@@ -747,21 +683,21 @@
     <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap:1.5rem; margin-bottom:3rem;">
       <div class="about-card fade-in" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:0; overflow:hidden;">
         <div style="height:200px; background:linear-gradient(135deg,#1a1a26,#2a1a2a); display:flex; align-items:center; justify-content:center; font-size:5rem;">📸</div>
-        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--white); margin-bottom:0.4rem;">Event Photography</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Professional photography for events, ceremonies, and special occasions across Kigali, Rwanda.</div></div>
+        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--text); margin-bottom:0.4rem;">Event Photography</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Professional photography for events, ceremonies, and special occasions across Kigali, Rwanda.</div></div>
       </div>
       <div class="about-card fade-in" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:0; overflow:hidden;">
         <div style="height:200px; background:linear-gradient(135deg,#1a1a26,#1a2a1a); display:flex; align-items:center; justify-content:center; font-size:5rem;">🎬</div>
-        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--white); margin-bottom:0.4rem;">Videography &amp; Content</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Producing video content for storytelling, digital platforms, and brand promotion with creative direction.</div></div>
+        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--text); margin-bottom:0.4rem;">Videography &amp; Content</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Producing video content for storytelling, digital platforms, and brand promotion with creative direction.</div></div>
       </div>
       <div class="about-card fade-in" style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:0; overflow:hidden;">
         <div style="height:200px; background:linear-gradient(135deg,#1a1a26,#2a2a1a); display:flex; align-items:center; justify-content:center; font-size:5rem;">🖼️</div>
-        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--white); margin-bottom:0.4rem;">Digital Media &amp; Storytelling</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Creating compelling visual narratives for online platforms, social media, and digital marketing campaigns.</div></div>
+        <div style="padding:1.4rem;"><div style="font-weight:700; color:var(--text); margin-bottom:0.4rem;">Digital Media &amp; Storytelling</div><div style="color:var(--muted); font-size:0.88rem; line-height:1.7;">Creating compelling visual narratives for online platforms, social media, and digital marketing campaigns.</div></div>
       </div>
     </div>
     <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
-      <img src="profile.jpg" alt="Richard Manzi - Photographer" style="width:120px; height:120px; border-radius:12px; object-fit:cover; object-position:top; border:2px solid rgba(192,57,43,0.3); flex-shrink:0;" />
+      <img src="profile.jpg" alt="Richard Manzi" style="width:120px; height:120px; border-radius:12px; object-fit:cover; object-position:top; border:2px solid rgba(192,57,43,0.3); flex-shrink:0;" />
       <div>
-        <div style="font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:0.5rem;">Richard Manzi — Freelance Creative</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--text); margin-bottom:0.5rem;">Richard Manzi — Freelance Creative</div>
         <div style="color:var(--muted); font-size:0.92rem; line-height:1.8; max-width:500px;">Based in Kigali, Rwanda, I combine my passion for technology and visual storytelling to deliver high-quality photography and videography services. Available for events, brand shoots, and digital content creation.</div>
         <div style="margin-top:1rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
           <span class="skill-tag">📍 Kigali, Rwanda</span>
@@ -781,42 +717,9 @@
     <div class="divider"></div>
     <p class="section-sub">Feedback from clients and collaborators who have worked with me on projects.</p>
     <div class="testimonials-grid">
-      <div class="testimonial-card fade-in">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-text">Richard built our business website from scratch. It was professional, fast, and exactly what we needed to attract more customers online. Very reliable and easy to work with.</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JM</div>
-          <div>
-            <div class="testimonial-name">Jean-Marie K.</div>
-            <div class="testimonial-role">Business Owner, Kigali</div>
-            <div class="testimonial-stars">★★★★★</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card fade-in">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-text">The pharmacy inventory system Richard developed saved us so much time. Managing stock across multiple computers is now seamless. Highly recommend his work.</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">AN</div>
-          <div>
-            <div class="testimonial-name">Amina N.</div>
-            <div class="testimonial-role">Pharmacy Manager, Rwanda</div>
-            <div class="testimonial-stars">★★★★★</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card fade-in">
-        <div class="testimonial-quote">"</div>
-        <div class="testimonial-text">Richard photographed our event and the results were stunning. He has a great eye for detail and delivered everything on time. We will definitely work with him again.</div>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">PU</div>
-          <div>
-            <div class="testimonial-name">Patrick U.</div>
-            <div class="testimonial-role">Event Organizer, Kigali</div>
-            <div class="testimonial-stars">★★★★★</div>
-          </div>
-        </div>
-      </div>
+      <div class="testimonial-card fade-in"><div class="testimonial-quote">"</div><div class="testimonial-text">Richard built our business website from scratch. It was professional, fast, and exactly what we needed to attract more customers online. Very reliable and easy to work with.</div><div class="testimonial-author"><div class="testimonial-avatar">JM</div><div><div class="testimonial-name">Jean-Marie K.</div><div class="testimonial-role">Business Owner, Kigali</div><div class="testimonial-stars">★★★★★</div></div></div></div>
+      <div class="testimonial-card fade-in"><div class="testimonial-quote">"</div><div class="testimonial-text">The pharmacy inventory system Richard developed saved us so much time. Managing stock across multiple computers is now seamless. Highly recommend his work.</div><div class="testimonial-author"><div class="testimonial-avatar">AN</div><div><div class="testimonial-name">Amina N.</div><div class="testimonial-role">Pharmacy Manager, Rwanda</div><div class="testimonial-stars">★★★★★</div></div></div></div>
+      <div class="testimonial-card fade-in"><div class="testimonial-quote">"</div><div class="testimonial-text">Richard photographed our event and the results were stunning. He has a great eye for detail and delivered everything on time. We will definitely work with him again.</div><div class="testimonial-author"><div class="testimonial-avatar">PU</div><div><div class="testimonial-name">Patrick U.</div><div class="testimonial-role">Event Organizer, Kigali</div><div class="testimonial-stars">★★★★★</div></div></div></div>
     </div>
   </div>
 </section>
@@ -845,31 +748,17 @@
     <p class="section-sub">Available for remote work, freelance projects, and international opportunities. Let's build something great together.</p>
     <div class="contact-grid">
       <div class="contact-info fade-in">
-        <a href="mailto:richardmanzi30@gmail.com" class="contact-item">
-          <div class="contact-icon">✉</div>
-          <div><div class="contact-label">Email</div><div class="contact-value">richardmanzi30@gmail.com</div></div>
-        </a>
-        <a href="tel:+250782511514" class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div><div class="contact-label">Phone</div><div class="contact-value">(+250) 782 511 514</div></div>
-        </a>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div><div class="contact-label">Address</div><div class="contact-value">Kn 11 Street, Kigali, Rwanda</div></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">🌍</div>
-          <div><div class="contact-label">Availability</div><div class="contact-value">Remote &amp; International</div></div>
-        </div>
-        <a href="https://github.com/intorestudio-beep" target="_blank" class="contact-item">
-          <div class="contact-icon">🐙</div>
-          <div><div class="contact-label">GitHub</div><div class="contact-value">intorestudio-beep</div></div>
-        </a>
+        <a href="mailto:richardmanzi30@gmail.com" class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-label">Email</div><div class="contact-value">richardmanzi30@gmail.com</div></div></a>
+        <a href="tel:+250782511514" class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-value">(+250) 782 511 514</div></div></a>
+        <a href="https://wa.me/250782511514" target="_blank" class="contact-item"><div class="contact-icon">💬</div><div><div class="contact-label">WhatsApp</div><div class="contact-value">+250 782 511 514</div></div></a>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">Kn 11 Street, Kigali, Rwanda</div></div></div>
+        <a href="https://github.com/intorestudio-beep" target="_blank" class="contact-item"><div class="contact-icon">🐙</div><div><div class="contact-label">GitHub</div><div class="contact-value">intorestudio-beep</div></div></a>
       </div>
       <div class="fade-in">
         <form class="contact-form" onsubmit="handleSubmit(event)">
           <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="John Doe" required /></div>
           <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="john@example.com" required /></div>
+          <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="Web Development / Photography / AI..." /></div>
           <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or opportunity..." required></textarea></div>
           <button type="submit" class="form-btn">Send Message →</button>
         </form>
@@ -888,12 +777,18 @@
     </div>
     <div class="footer-socials">
       <a href="https://github.com/intorestudio-beep" target="_blank" class="footer-social" title="GitHub">🐙</a>
+      <a href="https://wa.me/250782511514" target="_blank" class="footer-social" title="WhatsApp">💬</a>
       <a href="mailto:richardmanzi30@gmail.com" class="footer-social" title="Email">✉</a>
-      <a href="tel:+250782511514" class="footer-social" title="Phone">📞</a>
       <a href="mycv_260314_131811.jpg" download="Richard_Manzi_CV.jpg" class="footer-social" title="Download CV">⬇</a>
     </div>
   </div>
 </footer>
+
+<!-- WHATSAPP FLOAT -->
+<a id="whatsapp-btn" href="https://wa.me/250782511514?text=Hi%20Richard%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20work%20with%20you." target="_blank" title="Chat on WhatsApp">
+  💬
+  <span class="wa-tooltip">Chat on WhatsApp</span>
+</a>
 
 <!-- BACK TO TOP -->
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
@@ -901,100 +796,86 @@
 <script>
   // ── PAGE LOADER ──
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-    }, 1600);
+    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1600);
+  });
+
+  // ── SCROLL PROGRESS BAR ──
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+    // Active nav
+    let current = '';
+    document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    document.querySelectorAll('.nav-links li a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
   });
 
   // ── TYPING EFFECT ──
-  const titles = ['Software Developer', 'Web Developer', 'AI Builder', 'Creative Technologist', 'Photographer'];
+  const titles = ['Software Developer', 'Web Developer', 'AI Builder', 'Creative Technologist', 'Photographer & Videographer'];
   let ti = 0, ci = 0, deleting = false;
   const typedEl = document.getElementById('typed');
   function type() {
     const current = titles[ti];
-    if (!deleting) {
-      typedEl.textContent = current.slice(0, ++ci);
-      if (ci === current.length) { deleting = true; setTimeout(type, 1800); return; }
-    } else {
-      typedEl.textContent = current.slice(0, --ci);
-      if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; }
-    }
-    setTimeout(type, deleting ? 60 : 100);
+    if (!deleting) { typedEl.textContent = current.slice(0, ++ci); if (ci === current.length) { deleting = true; setTimeout(type, 1800); return; } }
+    else { typedEl.textContent = current.slice(0, --ci); if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; } }
+    setTimeout(type, deleting ? 55 : 95);
   }
   setTimeout(type, 2000);
 
-  // ── FADE IN OBSERVER ──
+  // ── ANIMATED COUNTERS ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.target.includes('+') ? '+' : (target === 100 ? '%' : '+');
+    let count = 0;
+    const step = Math.ceil(target / 40);
+    const interval = setInterval(() => {
+      count = Math.min(count + step, target);
+      el.textContent = count + (count === target ? suffix : '');
+      if (count >= target) clearInterval(interval);
+    }, 40);
+  }
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { animateCounter(entry.target); counterObserver.unobserve(entry.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // ── FADE IN ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width + '%';
-        });
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
       }
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
   const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
-        });
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => { setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200); }); });
   }, { threshold: 0.3 });
   document.querySelectorAll('.skill-category').forEach(el => skillObserver.observe(el));
 
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  }
+  const saved = localStorage.getItem('theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); document.getElementById('theme-btn').textContent = saved === 'dark' ? '🌙' : '☀️'; }
+
   // ── MOBILE DRAWER ──
-  function openDrawer() {
-    document.getElementById('mobile-drawer').classList.add('open');
-    document.getElementById('drawer-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDrawer() {
-    document.getElementById('mobile-drawer').classList.remove('open');
-    document.getElementById('drawer-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  function openDrawer() { document.getElementById('mobile-drawer').classList.add('open'); document.getElementById('drawer-overlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { document.getElementById('mobile-drawer').classList.remove('open'); document.getElementById('drawer-overlay').classList.remove('open'); document.body.style.overflow = ''; }
 
-  // ── PROJECT MODALS ──
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  function closeModalOutside(e, id) {
-    if (e.target === document.getElementById(id)) closeModal(id);
-  }
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.open').forEach(m => {
-        m.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    }
-  });
-
-  // ── BACK TO TOP ──
-  window.addEventListener('scroll', () => {
-    const btn = document.getElementById('back-top');
-    btn.classList.toggle('show', window.scrollY > 400);
-  });
-
-  // ── ACTIVE NAV ──
-  const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent3)' : '';
-    });
-  });
+  // ── MODALS ──
+  function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+  function closeModalOutside(e, id) { if (e.target === document.getElementById(id)) closeModal(id); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(m => { m.classList.remove('open'); document.body.style.overflow = ''; }); closeDrawer(); } });
 
   // ── FORM SUBMIT ──
   function handleSubmit(e) {
