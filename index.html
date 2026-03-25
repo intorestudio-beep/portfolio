@@ -589,6 +589,7 @@
       <div class="skill-category fade-in"><div class="skill-cat-title"><div class="skill-cat-icon">🛠️</div> Tools &amp; Platforms</div><div class="skill-tags"><span class="skill-tag">GitHub</span><span class="skill-tag">Vercel</span><span class="skill-tag">Replit</span><span class="skill-tag">Lovable AI</span><span class="skill-tag">Notion</span><span class="skill-tag">n8n</span><span class="skill-tag">XAMPP</span><span class="skill-tag">MySQL</span></div></div>
       <div class="skill-category fade-in"><div class="skill-cat-title"><div class="skill-cat-icon">📸</div> Creative Skills</div><div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-bar-name">Photography</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div><div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-bar-name">Videography</span><span class="skill-bar-pct">78%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div></div><div class="skill-bar-wrap"><div class="skill-bar-top"><span class="skill-bar-name">Content Creation</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div></div>
       <div class="skill-category fade-in"><div class="skill-cat-title"><div class="skill-cat-icon">📦</div> Business Systems</div><div class="skill-tags"><span class="skill-tag">POS Systems</span><span class="skill-tag">Inventory Mgmt</span><span class="skill-tag">Software Licensing</span><span class="skill-tag">Digital Products</span><span class="skill-tag">Business Websites</span></div></div>
+      <div class="skill-category fade-in"><div class="skill-cat-title"><div class="skill-cat-icon">🍳</div> Life Skills</div><div class="skill-tags"><span class="skill-tag">Cooking</span><span class="skill-tag">Hospitality</span><span class="skill-tag">Guest Services</span><span class="skill-tag">Storytelling</span><span class="skill-tag">Urban Exploration</span></div></div>
     </div>
   </div>
 </section>
@@ -630,6 +631,7 @@
     <h2 class="section-title">Work <span>Experience</span></h2>
     <div class="divider"></div>
     <div class="timeline">
+      <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2024</div><div class="timeline-title">Hospitality Intern</div><div class="timeline-company">Ruzizi Tented Lodge · Akagera National Park, Rwanda</div><div class="timeline-desc">Completed an internship at the prestigious Ruzizi Tented Lodge inside Akagera National Park. Gained hands-on experience in hospitality operations, guest services, and the tourism industry in one of Rwanda's top wildlife destinations.</div></div>
       <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2026 — Present</div><div class="timeline-title">Automation &amp; AI Developer</div><div class="timeline-company">Independent Projects · Remote</div><div class="timeline-desc">Building automation workflows and exploring AI tools to develop systems that automate tasks, process information, and improve digital productivity.</div></div>
       <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2024 — 2026</div><div class="timeline-title">Web Designer &amp; Developer</div><div class="timeline-company">Independent Projects · Rwanda</div><div class="timeline-desc">Designed and developed websites, business systems, and digital platforms that help businesses create an online presence and manage operations efficiently.</div></div>
       <div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-date">2024 — 2026</div><div class="timeline-title">Photographer &amp; Videographer</div><div class="timeline-company">Freelance Creative · Rwanda</div><div class="timeline-desc">Providing professional photography and videography services for events, digital content, and storytelling across Kigali, Rwanda.</div></div>
@@ -1038,20 +1040,34 @@
       .catch(() => { btn.textContent = 'Error — Try WhatsApp'; btn.style.background = '#e74c3c'; setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.disabled = false; }, 4000); });
   }
 
-  // TESTIMONIAL FORM — adds card to the live grid
+  // TESTIMONIAL PERSISTENCE via localStorage
+  function loadSavedTestimonials() {
+    const saved = JSON.parse(localStorage.getItem('rm_testimonials') || '[]');
+    saved.forEach(t => appendTestimonialCard(t.name, t.role, t.message, t.stars, false));
+  }
+  function appendTestimonialCard(name, role, message, stars, animate) {
+    const starStr = '★'.repeat(parseInt(stars)) + '☆'.repeat(5 - parseInt(stars));
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const card = document.createElement('div');
+    card.className = 'testimonial-card' + (animate ? '' : ' visible');
+    if (animate) card.style.animation = 'fadeSlideIn 0.5s ease forwards';
+    card.innerHTML = `<div class="testimonial-quote">"</div><div class="testimonial-text">${message}</div><div class="testimonial-author"><div class="testimonial-avatar">${initials}</div><div><div class="testimonial-name">${name}</div><div class="testimonial-role">${role}</div><div class="testimonial-stars">${starStr}</div></div></div>`;
+    document.getElementById('testimonials-list').appendChild(card);
+  }
+  loadSavedTestimonials();
+
+  // TESTIMONIAL FORM — adds card and saves to localStorage
   function submitTestimonial(e) {
     e.preventDefault();
     const name = document.getElementById('t-name').value.trim();
     const role = document.getElementById('t-role').value.trim() || 'Client';
     const message = document.getElementById('t-message').value.trim();
     const stars = document.querySelector('input[name="stars"]:checked')?.value || 5;
-    const starStr = '★'.repeat(parseInt(stars)) + '☆'.repeat(5 - parseInt(stars));
-    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-    const card = document.createElement('div');
-    card.className = 'testimonial-card';
-    card.style.animation = 'fadeSlideIn 0.5s ease forwards';
-    card.innerHTML = `<div class="testimonial-quote">"</div><div class="testimonial-text">${message}</div><div class="testimonial-author"><div class="testimonial-avatar">${initials}</div><div><div class="testimonial-name">${name}</div><div class="testimonial-role">${role}</div><div class="testimonial-stars">${starStr}</div></div></div>`;
-    document.getElementById('testimonials-list').appendChild(card);
+    appendTestimonialCard(name, role, message, stars, true);
+    // Save to localStorage
+    const saved = JSON.parse(localStorage.getItem('rm_testimonials') || '[]');
+    saved.push({ name, role, message, stars });
+    localStorage.setItem('rm_testimonials', JSON.stringify(saved));
     const btn = e.target.querySelector('.t-form-btn');
     btn.textContent = 'Thank you! ✓'; btn.style.background = '#27ae60';
     setTimeout(() => { btn.textContent = 'Submit Testimonial →'; btn.style.background = ''; e.target.reset(); }, 3000);
