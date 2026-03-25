@@ -1040,37 +1040,51 @@
       .catch(() => { btn.textContent = 'Error — Try WhatsApp'; btn.style.background = '#e74c3c'; setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.disabled = false; }, 4000); });
   }
 
-  // TESTIMONIAL PERSISTENCE via localStorage
-  function loadSavedTestimonials() {
-    const saved = JSON.parse(localStorage.getItem('rm_testimonials') || '[]');
-    saved.forEach(t => appendTestimonialCard(t.name, t.role, t.message, t.stars, false));
-  }
-  function appendTestimonialCard(name, role, message, stars, animate) {
-    const starStr = '★'.repeat(parseInt(stars)) + '☆'.repeat(5 - parseInt(stars));
-    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+  // TESTIMONIAL SYSTEM — loads from GitHub JSON, saves via Formspree email to Richard
+  const RAW_URL = 'https://raw.githubusercontent.com/intorestudio-beep/portfolio/main/testimonials.json';
+
+  function appendTestimonialCard(t, animate) {
+    const starStr = '★'.repeat(parseInt(t.stars)) + '☆'.repeat(5 - parseInt(t.stars));
+    const initials = t.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
     const card = document.createElement('div');
     card.className = 'testimonial-card' + (animate ? '' : ' visible');
     if (animate) card.style.animation = 'fadeSlideIn 0.5s ease forwards';
-    card.innerHTML = `<div class="testimonial-quote">"</div><div class="testimonial-text">${message}</div><div class="testimonial-author"><div class="testimonial-avatar">${initials}</div><div><div class="testimonial-name">${name}</div><div class="testimonial-role">${role}</div><div class="testimonial-stars">${starStr}</div></div></div>`;
+    card.innerHTML = `<div class="testimonial-quote">"</div><div class="testimonial-text">${t.message}</div><div class="testimonial-author"><div class="testimonial-avatar">${initials}</div><div><div class="testimonial-name">${t.name}</div><div class="testimonial-role">${t.role}</div><div class="testimonial-stars">${starStr}</div></div></div>`;
     document.getElementById('testimonials-list').appendChild(card);
   }
-  loadSavedTestimonials();
 
-  // TESTIMONIAL FORM — adds card and saves to localStorage
+  // Load testimonials from GitHub JSON file (visible to all visitors)
+  fetch(RAW_URL + '?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => { (data.testimonials || []).forEach(t => appendTestimonialCard(t, false)); })
+    .catch(() => {});
+
+  // TESTIMONIAL FORM — shows card instantly + emails Richard via Formspree + saves to localStorage as backup
   function submitTestimonial(e) {
     e.preventDefault();
     const name = document.getElementById('t-name').value.trim();
     const role = document.getElementById('t-role').value.trim() || 'Client';
     const message = document.getElementById('t-message').value.trim();
-    const stars = document.querySelector('input[name="stars"]:checked')?.value || 5;
-    appendTestimonialCard(name, role, message, stars, true);
-    // Save to localStorage
+    const stars = document.querySelector('input[name="stars"]:checked')?.value || '5';
+    const btn = e.target.querySelector('.t-form-btn');
+    btn.textContent = 'Saving...'; btn.disabled = true;
+
+    // Show card immediately on this visitor's screen
+    appendTestimonialCard({ name, role, message, stars }, true);
+
+    // Save to localStorage so it persists for this visitor
     const saved = JSON.parse(localStorage.getItem('rm_testimonials') || '[]');
     saved.push({ name, role, message, stars });
     localStorage.setItem('rm_testimonials', JSON.stringify(saved));
-    const btn = e.target.querySelector('.t-form-btn');
-    btn.textContent = 'Thank you! ✓'; btn.style.background = '#27ae60';
-    setTimeout(() => { btn.textContent = 'Submit Testimonial →'; btn.style.background = ''; e.target.reset(); }, 3000);
+
+    // Email Richard via Formspree so he can manually add it to testimonials.json
+    const fd = new FormData();
+    fd.append('_subject', 'New Testimonial from ' + name);
+    fd.append('name', name); fd.append('role', role); fd.append('message', message); fd.append('stars', stars);
+    fetch('https://formspree.io/f/richardmanzi30@gmail.com', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }).catch(() => {});
+
+    btn.textContent = '✓ Thank You!'; btn.style.background = '#27ae60';
+    setTimeout(() => { btn.textContent = 'Submit Testimonial →'; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3500);
   }
 
   // PRICING CALCULATOR
