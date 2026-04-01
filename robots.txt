@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://intorestudio-beep.github.io/portfolio/sitemap.xml

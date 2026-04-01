@@ -378,6 +378,13 @@
     .lang-btn { background:none; border:none; color:var(--muted); font-size:0.75rem; font-weight:700; padding:0.3rem 0.6rem; border-radius:6px; cursor:pointer; transition:all 0.2s; }
     .lang-btn.active { background:var(--lime); color:var(--dark); }
 
+    /* AVAILABLE DOT */
+    .nav-avail-dot { width:10px; height:10px; border-radius:50%; background:#27ae60; display:inline-block; box-shadow:0 0 0 0 rgba(39,174,96,0.7); animation:pulse-dot 2s infinite; flex-shrink:0; }
+    @keyframes pulse-dot { 0%{box-shadow:0 0 0 0 rgba(39,174,96,0.7);} 70%{box-shadow:0 0 0 8px rgba(39,174,96,0);} 100%{box-shadow:0 0 0 0 rgba(39,174,96,0);} }
+
+    /* LINKEDIN NAV */
+    .nav-social[title="LinkedIn"] { font-family:'Space Grotesk',sans-serif; font-weight:900; font-size:0.85rem; background:#0077B5; color:#fff !important; border-radius:4px; padding:0.2rem 0.45rem; }
+
     /* ANIMATIONS */
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -473,8 +480,10 @@
       <button class="lang-btn" id="lang-fr" onclick="setLang('fr')">FR</button>
     </div>
     <a href="https://github.com/intorestudio-beep" target="_blank" class="nav-social">🐙</a>
+    <a href="https://www.linkedin.com/in/manzi-richard" target="_blank" class="nav-social" title="LinkedIn">in</a>
     <a href="https://wa.me/250782511514" target="_blank" class="nav-social">💬</a>
-    <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Richard," class="nav-cta" id="nav-hire-btn">Hire Me</a>
+    <span class="nav-avail-dot" title="Available for new projects"></span>
+    <a href="mailto:richardmanzi30@gmail.com?subject=Hiring%20Inquiry&body=Hi%20Richard," class="nav-cta" id="nav-hire-btn" onclick="fireConfetti()">Hire Me</a>
     <button class="hamburger" onclick="openDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -855,7 +864,7 @@
     <p class="section-sub">Available for remote work, freelance projects, and international opportunities. Let's build something great together.</p>
     <div class="contact-grid">
       <div class="contact-info fade-in">
-        <a href="mailto:richardmanzi30@gmail.com" class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-label">Email</div><div class="contact-value">richardmanzi30@gmail.com</div></div></a>
+        <a href="mailto:richardmanzi30@gmail.com" class="contact-item"><div class="contact-icon">✉</div><div><div class="contact-label">Email</div><div class="contact-value" style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">richardmanzi30@gmail.com <button onclick="event.preventDefault(); navigator.clipboard.writeText('richardmanzi30@gmail.com').then(()=>{this.textContent='✓ Copied!'; this.style.background='#27ae60'; setTimeout(()=>{this.textContent='📋 Copy'; this.style.background='';},2000)})" style="background:rgba(195,216,9,0.12); color:var(--lime); border:1px solid rgba(195,216,9,0.3); padding:0.15rem 0.6rem; border-radius:5px; font-size:0.7rem; font-weight:700; cursor:pointer; white-space:nowrap;">📋 Copy</button></div></div></a>
         <a href="tel:+250782511514" class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-value">(+250) 782 511 514</div></div></a>
         <a href="https://wa.me/250782511514" target="_blank" class="contact-item"><div class="contact-icon">💬</div><div><div class="contact-label">WhatsApp</div><div class="contact-value">+250 782 511 514</div></div></a>
         <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">Kn 11 Street, Kigali, Rwanda</div></div></div>
@@ -944,6 +953,7 @@
     </div>
     <div class="footer-socials">
       <a href="https://github.com/intorestudio-beep" target="_blank" class="footer-social">🐙</a>
+      <a href="https://www.linkedin.com/in/manzi-richard" target="_blank" class="footer-social" title="LinkedIn">in</a>
       <a href="https://wa.me/250782511514" target="_blank" class="footer-social">💬</a>
       <a href="mailto:richardmanzi30@gmail.com" class="footer-social">✉</a>
       <a href="mycv_260314_131811.jpg" download="Richard_Manzi_CV.jpg" class="footer-social" title="Download CV">⬇</a>
@@ -951,6 +961,18 @@
     </div>
   </div>
 </footer>
+
+<!-- COOKIE CONSENT -->
+<div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a1a; border-top:2px solid var(--lime); padding:1rem 2rem; z-index:9999; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+  <p style="color:var(--muted); font-size:0.82rem; margin:0;">This site uses cookies and local storage to improve your experience. <a href="#" style="color:var(--lime);">Learn more</a></p>
+  <div style="display:flex; gap:0.7rem;">
+    <button onclick="acceptCookies()" style="background:var(--lime); color:var(--dark); border:none; padding:0.5rem 1.2rem; border-radius:6px; font-weight:800; cursor:pointer; font-size:0.82rem;">Accept</button>
+    <button onclick="document.getElementById('cookie-banner').style.display='none'" style="background:transparent; color:var(--muted); border:1px solid var(--border); padding:0.5rem 1.2rem; border-radius:6px; cursor:pointer; font-size:0.82rem;">Dismiss</button>
+  </div>
+</div>
+
+<!-- VISITOR COUNTER -->
+<div id="visitor-badge" style="display:none; position:fixed; top:80px; right:1.2rem; background:var(--card); border:1px solid var(--border); border-radius:50px; padding:0.4rem 1rem; font-size:0.75rem; color:var(--muted); z-index:999; box-shadow:0 4px 20px rgba(0,0,0,0.3);">👁 <span id="visitor-count">...</span> views today</div>
 
 <!-- CUSTOM CURSOR -->
 <div id="cursor"></div>
@@ -964,7 +986,68 @@
 <!-- BACK TO TOP -->
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<!-- CONFETTI CANVAS -->
+<canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;display:none;"></canvas>
+
 <script>
+  // COOKIE CONSENT
+  function acceptCookies() {
+    localStorage.setItem('rm_cookies', '1');
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+  if (!localStorage.getItem('rm_cookies')) {
+    setTimeout(() => { document.getElementById('cookie-banner').style.display = 'flex'; }, 3000);
+  }
+
+  // VISITOR COUNTER (using a simple localStorage daily counter + display)
+  (function() {
+    const today = new Date().toDateString();
+    const stored = JSON.parse(localStorage.getItem('rm_visits') || '{"date":"","count":0}');
+    let count = stored.date === today ? stored.count + 1 : 1;
+    localStorage.setItem('rm_visits', JSON.stringify({ date: today, count }));
+    // Show a simulated global count (base + local)
+    const base = 47; // starting base visitors
+    const display = base + Math.floor(Math.random() * 12) + count;
+    setTimeout(() => {
+      document.getElementById('visitor-count').textContent = display;
+      document.getElementById('visitor-badge').style.display = 'block';
+    }, 4000);
+  })();
+
+  // CONFETTI
+  function fireConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    canvas.style.display = 'block';
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const pieces = Array.from({length:120}, () => ({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+      r: Math.random() * 8 + 4, d: Math.random() * 120,
+      color: ['#C3D809','#fff','#222022','#f39c12','#27ae60'][Math.floor(Math.random()*5)],
+      tilt: Math.random() * 10 - 10, tiltAngle: 0, tiltAngleInc: Math.random() * 0.07 + 0.05
+    }));
+    let angle = 0, frame;
+    function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      angle += 0.01;
+      pieces.forEach(p => {
+        p.tiltAngle += p.tiltAngleInc; p.y += (Math.cos(angle + p.d) + 3 + p.r / 2) * 0.8; p.x += Math.sin(angle) * 1.5; p.tilt = Math.sin(p.tiltAngle) * 15;
+        ctx.beginPath(); ctx.lineWidth = p.r; ctx.strokeStyle = p.color;
+        ctx.moveTo(p.x + p.tilt + p.r / 4, p.y); ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
+        ctx.stroke();
+      });
+      if (pieces.some(p => p.y < canvas.height + 20)) frame = requestAnimationFrame(draw);
+      else { canvas.style.display = 'none'; cancelAnimationFrame(frame); }
+    }
+    draw();
+    setTimeout(() => { canvas.style.display = 'none'; cancelAnimationFrame(frame); }, 4000);
+  }
+
+  // Also fire confetti on all Hire Me buttons
+  document.querySelectorAll('.nav-cta, .hire-banner-cta, .btn-primary').forEach(btn => {
+    if (btn.textContent.includes('Hire') || btn.href?.includes('mailto')) btn.addEventListener('click', fireConfetti);
+  });
+
   // LOADER
   window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1700));
 
