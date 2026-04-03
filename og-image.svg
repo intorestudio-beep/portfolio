@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#222022"/>
+  <!-- Lime accent bar -->
+  <rect width="1200" height="8" fill="#C3D809"/>
+  <!-- Right lime block -->
+  <rect x="700" y="0" width="500" height="630" fill="#C3D809" opacity="0.07"/>
+  <!-- Big RM monogram -->
+  <text x="950" y="400" font-family="Arial" font-weight="900" font-size="320" fill="#C3D809" opacity="0.12" text-anchor="middle">RM</text>
+  <!-- Available badge -->
+  <rect x="80" y="80" width="220" height="36" rx="18" fill="#C3D809"/>
+  <text x="190" y="103" font-family="Arial" font-weight="800" font-size="14" fill="#222022" text-anchor="middle">● AVAILABLE FOR HIRE</text>
+  <!-- Name -->
+  <text x="80" y="240" font-family="Arial" font-weight="900" font-size="88" fill="#f5f5f0">Richard</text>
+  <text x="80" y="340" font-family="Arial" font-weight="900" font-size="88" fill="#C3D809">Manzi</text>
+  <!-- Title -->
+  <text x="80" y="400" font-family="Arial" font-weight="600" font-size="28" fill="#999899">Software Developer · AI Builder · Creative Technologist</text>
+  <!-- Location -->
+  <text x="80" y="450" font-family="Arial" font-weight="400" font-size="22" fill="#666">📍 Kigali, Rwanda · Remote &amp; International</text>
+  <!-- Divider -->
+  <rect x="80" y="490" width="120" height="4" rx="2" fill="#C3D809"/>
+  <!-- URL -->
+  <text x="80" y="560" font-family="Arial" font-weight="700" font-size="20" fill="#C3D809">intorestudio-beep.github.io/portfolio</text>
+  <!-- Skills pills -->
+  <rect x="80" y="575" width="110" height="28" rx="14" fill="#2e2c2e"/>
+  <text x="135" y="594" font-family="Arial" font-size="13" fill="#C3D809" text-anchor="middle">Web Dev</text>
+  <rect x="200" y="575" width="80" height="28" rx="14" fill="#2e2c2e"/>
+  <text x="240" y="594" font-family="Arial" font-size="13" fill="#C3D809" text-anchor="middle">AI Tools</text>
+  <rect x="290" y="575" width="110" height="28" rx="14" fill="#2e2c2e"/>
+  <text x="345" y="594" font-family="Arial" font-size="13" fill="#C3D809" text-anchor="middle">Automation</text>
+  <rect x="410" y="575" width="120" height="28" rx="14" fill="#2e2c2e"/>
+  <text x="470" y="594" font-family="Arial" font-size="13" fill="#C3D809" text-anchor="middle">Photography</text>
+</svg>
