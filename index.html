@@ -419,7 +419,137 @@
       #back-top, #whatsapp-btn { right: 1rem; }
       #hire-banner { flex-wrap: wrap; }
     }
-  </style>
+  
+/* ROBOTIC DESIGN COUNTDOWN */
+.countdown-card {
+  background: linear-gradient(135deg, rgba(195,216,9,0.08) 0%, var(--card) 100%);
+  border: 1.5px solid rgba(195,216,9,0.4);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  grid-column: 1 / -1;
+}
+.countdown-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(195,216,9,0.05), transparent);
+  animation: countdown-rotate 8s linear infinite;
+}
+@keyframes countdown-rotate {
+  100% { transform: rotate(360deg); }
+}
+.countdown-inner {
+  position: relative;
+  z-index: 1;
+}
+.countdown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(195,216,9,0.15);
+  border: 1px solid rgba(195,216,9,0.3);
+  color: var(--lime);
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+.countdown-badge .pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--lime);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.countdown-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.countdown-subtitle {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.countdown-unit {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  min-width: 70px;
+  transition: border-color 0.3s;
+}
+.countdown-unit:hover {
+  border-color: rgba(195,216,9,0.5);
+}
+.countdown-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.countdown-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.countdown-progress {
+  margin-top: 1.5rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.countdown-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.countdown-progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.countdown-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--lime), #a8c800);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+@media (max-width: 480px) {
+  .countdown-timer { gap: 0.6rem; }
+  .countdown-unit { min-width: 60px; padding: 0.8rem; }
+  .countdown-number { font-size: 1.4rem; }
+}
+
+</style>
 </head>
 <body>
 
@@ -1297,5 +1427,49 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+
+<script>
+// Robotic Design Countdown Timer
+(function() {
+  const endDate = new Date('2026-12-20T00:00:00').getTime();
+  const startDate = new Date('2026-05-01T00:00:00').getTime(); // approximate start
+  
+  function updateCountdown() {
+    const now = Date.now();
+    const remaining = endDate - now;
+    
+    if (remaining <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      document.getElementById('cd-pct').textContent = '100%';
+      document.getElementById('cd-fill').style.width = '100%';
+      return;
+    }
+    
+    const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((remaining % (1000 * 60)) / 1000);
+    
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('cd-mins').textContent = mins.toString().padStart(2, '0');
+    document.getElementById('cd-secs').textContent = secs.toString().padStart(2, '0');
+    
+    // Progress calculation
+    const totalDuration = endDate - startDate;
+    const elapsed = now - startDate;
+    const pct = Math.min(Math.max((elapsed / totalDuration) * 100, 0), 100);
+    document.getElementById('cd-pct').textContent = Math.round(pct) + '%';
+    document.getElementById('cd-fill').style.width = pct + '%';
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+
 </body>
 </html>
